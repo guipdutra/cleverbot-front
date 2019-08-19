@@ -6,6 +6,7 @@
 }
 
 .botCreation {
+  margin: 10px;
   display: flex;
   justify-content: flex-start;
 }
@@ -21,4 +22,35 @@
 }
 
 .botVisualization {
+  display: flex;
+  flex-orientation: row;
+  justify-content: flex-start;
+  margin: 10px;
+}
+
+.bot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #959AA2;
+  min-height: 300px;
+  width: 300px;
+  margin-right: 10px;
+}
+
+.orders {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.totals {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.orders span {
+  font-size: 10px;
 }

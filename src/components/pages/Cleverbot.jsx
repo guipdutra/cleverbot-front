@@ -3,7 +3,9 @@ import './Cleverbot.css'
 import {
   TextInput,
   FormField,
-  Button
+  Button,
+  Table,
+  Heading
 } from 'evergreen-ui'
 
 class Cleverbot extends Component {
@@ -52,11 +54,41 @@ class Cleverbot extends Component {
         <div className="line">
         </div>
         <div className="botVisualization">
-        </div>
-        <div className="bots">
-          <div cassName="bot">
+          <div className="bot">
+            <Heading size={100} marginTop="default">Robô Teste2 operando BTC_ETH</Heading>
+            <div className="orders">
+              <Table.Row intent="success" margin={5} >
+                <Table.TextCell>Ordem de COMPRA feito pel preço de: R$ 2,45</Table.TextCell>
+              </Table.Row>
+              <Table.Row intent="success" margin={5}>
+                <Table.TextCell>Ordem de COMPRA feito pel preço de: R$ 2,45</Table.TextCell>
+              </Table.Row>
+              <Table.Row intent="danger" margin={5}>
+                <Table.TextCell>Ordem de VENDA feito pel preço de: R$ 2,45</Table.TextCell>
+              </Table.Row>
+              <div className="totals">
+                <Heading size={100} marginTop="default">Total Acumulado(R$) 100,00</Heading>
+                <Heading size={100} marginTop="default">Lucro/Prejuizo(R$) 100,00</Heading>
+              </div>
+            </div>
           </div>
-          <div cassName="bot">
+          <div className="bot">
+            <Heading size={100} marginTop="default">Robô Teste2 operando BTC_ETH</Heading>
+            <div className="orders">
+              <Table.Row intent="success" margin={5} >
+                <Table.TextCell>Ordem de COMPRA feito pel preço de: R$ 2,45</Table.TextCell>
+              </Table.Row>
+              <Table.Row intent="success" margin={5}>
+                <Table.TextCell>Ordem de COMPRA feito pel preço de: R$ 2,45</Table.TextCell>
+              </Table.Row>
+              <Table.Row intent="danger" margin={5}>
+                <Table.TextCell>Ordem de VENDA feito pel preço de: R$ 2,45</Table.TextCell>
+              </Table.Row>
+              <div className="totals">
+                <Heading size={100} marginTop="default">Total Acumulado(R$) 100,00</Heading>
+                <Heading size={100} marginTop="default">Lucro/Prejuizo(R$) 100,00</Heading>
+              </div>
+            </div>
           </div>
         </div>
       </div>
