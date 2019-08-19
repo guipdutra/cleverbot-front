@@ -1,0 +1,24 @@
+.dashboardPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 40px;
+}
+
+.botCreation {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.botCreation Button {
+  margin-top: 20px;
+}
+
+.line {
+  border: 1px solid;
+  color: #959AA2;
+  margin-top: 50px;
+}
+
+.botVisualization {
+}
