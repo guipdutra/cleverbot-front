@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import './Cleverbot.css'
 import {
   TextInput,
@@ -15,10 +15,57 @@ class Cleverbot extends Component {
       botName: "",
       currencyCode: "",
       initialCapital: 0,
+      bots: [
+        {
+          "orders": [
+            {
+              "type": "sell",
+              "quantity": 100,
+              "price": "0.01871089"
+            },
+            {
+              "type": "buy",
+              "quantity": 100,
+              "price": "0.01874900"
+            }
+          ],
+          "bot": {
+            "name": "teste",
+            "money": 1000,
+            "currency_code": 148
+          }
+        }
+      ],
     }
   }
 
   componentDidMount() {
+  }
+
+  renderBots() {
+    const bots = this.state.bots
+
+    return bots.map(bot =>
+      (
+        <Fragment>
+          <div className="bot">
+            <Heading size={100} marginTop="default">Robô {bot.bot.name} operando BTC_ETH</Heading>
+
+            <div className="orders">
+              { bot.orders.map(order => (
+                <Table.Row key={bot.name} intent="success" margin={5} >
+                  <Table.TextCell>Ordem de {order.type} realizada no valor de: R$ {order.price} </Table.TextCell>
+                </Table.Row>
+              )) }
+            </div>
+            <div className="totals">
+              <Heading size={100} marginTop="default">Total Acumulado(R$) 100,00</Heading>
+              <Heading size={100} marginTop="default">Lucro/Prejuizo(R$) 100,00</Heading>
+            </div>
+          </div>
+        </Fragment>
+      )
+    )
   }
 
   render() {
@@ -54,42 +101,7 @@ class Cleverbot extends Component {
         <div className="line">
         </div>
         <div className="botVisualization">
-          <div className="bot">
-            <Heading size={100} marginTop="default">Robô Teste2 operando BTC_ETH</Heading>
-            <div className="orders">
-              <Table.Row intent="success" margin={5} >
-                <Table.TextCell>Ordem de COMPRA realizada no valor de: R$ 2,45</Table.TextCell>
-              </Table.Row>
-              <Table.Row intent="success" margin={5}>
-                <Table.TextCell>Ordem de COMPRA realizada no valor de: R$ 2,45</Table.TextCell>
-              </Table.Row>
-              <Table.Row intent="danger" margin={5}>
-                <Table.TextCell>Ordem de VENDA realizada no valor de: R$ 2,45</Table.TextCell>
-              </Table.Row>
-              <div className="totals">
-                <Heading size={100} marginTop="default">Total Acumulado(R$) 100,00</Heading>
-                <Heading size={100} marginTop="default">Lucro/Prejuizo(R$) 100,00</Heading>
-              </div>
-            </div>
-          </div>
-          <div className="bot">
-            <Heading size={100} marginTop="default">Robô Teste2 operando BTC_ETH</Heading>
-            <div className="orders">
-              <Table.Row intent="success" margin={5} >
-                <Table.TextCell>Ordem de COMPRA feito pel preço de: R$ 2,45</Table.TextCell>
-              </Table.Row>
-              <Table.Row intent="success" margin={5}>
-                <Table.TextCell>Ordem de COMPRA feito pel preço de: R$ 2,45</Table.TextCell>
-              </Table.Row>
-              <Table.Row intent="danger" margin={5}>
-                <Table.TextCell>Ordem de VENDA feito pel preço de: R$ 2,45</Table.TextCell>
-              </Table.Row>
-              <div className="totals">
-                <Heading size={100} marginTop="default">Total Acumulado(R$) 100,00</Heading>
-                <Heading size={100} marginTop="default">Lucro/Prejuizo(R$) 100,00</Heading>
-              </div>
-            </div>
-          </div>
+          { this.renderBots() }
         </div>
       </div>
     )
