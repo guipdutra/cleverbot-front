@@ -58,13 +58,13 @@ class Cleverbot extends Component {
             <Heading size={100} marginTop="default">Robô Teste2 operando BTC_ETH</Heading>
             <div className="orders">
               <Table.Row intent="success" margin={5} >
-                <Table.TextCell>Ordem de COMPRA feito pel preço de: R$ 2,45</Table.TextCell>
+                <Table.TextCell>Ordem de COMPRA realizada no valor de: R$ 2,45</Table.TextCell>
               </Table.Row>
               <Table.Row intent="success" margin={5}>
-                <Table.TextCell>Ordem de COMPRA feito pel preço de: R$ 2,45</Table.TextCell>
+                <Table.TextCell>Ordem de COMPRA realizada no valor de: R$ 2,45</Table.TextCell>
               </Table.Row>
               <Table.Row intent="danger" margin={5}>
-                <Table.TextCell>Ordem de VENDA feito pel preço de: R$ 2,45</Table.TextCell>
+                <Table.TextCell>Ordem de VENDA realizada no valor de: R$ 2,45</Table.TextCell>
               </Table.Row>
               <div className="totals">
                 <Heading size={100} marginTop="default">Total Acumulado(R$) 100,00</Heading>
