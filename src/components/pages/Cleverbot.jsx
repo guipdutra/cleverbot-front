@@ -7,6 +7,8 @@ import {
   Table,
   Heading
 } from 'evergreen-ui'
+import localStorage from 'local-storage'
+import { botService } from '../../services'
 
 class Cleverbot extends Component {
   constructor(props) {
@@ -40,6 +42,15 @@ class Cleverbot extends Component {
   }
 
   componentDidMount() {
+    const bots = localStorage.get('bots')
+
+    botService().list(bots).then((response) => {
+      this.populateBots(response.data.bots)
+    })
+  }
+
+  populateBots(bots) {
+    this.setState({ bots })
   }
 
   renderBots() {
@@ -68,11 +79,16 @@ class Cleverbot extends Component {
     )
   }
 
+  handleSubmit = (event) => {
+    localStorage.set('bots', [148])
+    event.preventDefault()
+  }
+
   render() {
     return (
       <div className="dashboardPage">
         <div className="botCreation">
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <FormField label="Nome do Robô" labelFor="botName">
               <TextInput
                 name="botName"
@@ -95,7 +111,7 @@ class Cleverbot extends Component {
               />
             </FormField>
 
-            <Button intent="success" className="createButton" appearance="primary">Criar robô</Button>
+            <Button intent="success" type="submit" className="createButton" appearance="primary">Criar robô</Button>
           </form>
         </div>
         <div className="line">

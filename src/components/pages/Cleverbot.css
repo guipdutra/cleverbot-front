@@ -47,8 +47,8 @@
 
 .totals {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .orders span {
