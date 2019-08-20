@@ -16,7 +16,9 @@ class Cleverbot extends Component {
     this.state = {
       botName: "",
       currencyCode: "",
-      initialCapital: 0,
+      initialCapital: "",
+      shortPeriod: "",
+      longPeriod: "",
       bots: [],
       currencyCodes: [],
     }
@@ -36,19 +38,45 @@ class Cleverbot extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
+
     let currencyCodes = this.state.currencyCodes
-    currencyCodes = currencyCodes.push(148)
+    currencyCodes = currencyCodes.push(this.state.currencyCode)
     this.setState({currency_codes: currencyCodes})
 
-    localStorage.set('bots', this.state.currencyCodes)
+    botService().create({
+      name: this.state.botName,
+      currency_code: this.state.currencyCode,
+      money: this.state.initialCapital,
+      short_period: this.state.shortPeriod,
+      long_period: this.state.longPeriod
+    }).then((response) => {
+      botService().list({currency_codes: this.state.currencyCodes}).then((response) => {
+        this.populateBots(response.data.bots)
+      })
+    })
 
-    botService().list({currency_codes: localStorage.get('bots')}).then((response) => {
-      this.populateBots(response.data.bots)
+    this.setState({
+      botName: "",
+      currencyCode: "",
+      initialCapital: "",
+      shortPeriod: "",
+      longPeriod: ""
     })
   }
 
   renderBots() {
     const bots = this.state.bots
+
+    if (this.state.currencyCodes.length > 0) {
+      setTimeout(
+        () => (
+          botService().list({currency_codes: this.state.currencyCodes}).then((response) => {
+            this.populateBots(response.data.bots)
+          })),
+        10000
+      );
+
+    }
 
     return bots.map(bot =>
       (
@@ -82,21 +110,35 @@ class Cleverbot extends Component {
               <TextInput
                 name="botName"
                 onChange={e => this.setState({ botName: e.target.value })}
-                value={this.state.value}
+                value={this.state.botName}
               />
             </FormField>
             <FormField label="Capital inicial" labelFor="initialCapital">
               <TextInput
                 name="initialCapital"
                 onChange={e => this.setState({ initialCapital: e.target.value })}
-                value={this.state.value}
+                value={this.state.initialCapital}
               />
             </FormField>
             <FormField label="Simbolo do criptoativo" labelFor="currencyCode">
               <TextInput
                 name="currencyCode"
                 onChange={e => this.setState({ currencyCode: e.target.value })}
-                value={this.state.value}
+                value={this.state.currencyCode}
+              />
+            </FormField>
+            <FormField label="Periodo curto da média movel" labelFor="shortPeriod">
+              <TextInput
+                name="shortPeriod"
+                onChange={e => this.setState({ shortPeriod: e.target.value })}
+                value={this.state.shortPeriod}
+              />
+            </FormField>
+            <FormField label="Periodo long da média movel" labelFor="longPeriod">
+              <TextInput
+                name="longPeriod"
+                onChange={e => this.setState({ longPeriod: e.target.value })}
+                value={this.state.longPeriod}
               />
             </FormField>
 
