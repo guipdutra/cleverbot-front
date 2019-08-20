@@ -17,40 +17,34 @@ class Cleverbot extends Component {
       botName: "",
       currencyCode: "",
       initialCapital: 0,
-      bots: [
-        {
-          "orders": [
-            {
-              "type": "sell",
-              "quantity": 100,
-              "price": "0.01871089"
-            },
-            {
-              "type": "buy",
-              "quantity": 100,
-              "price": "0.01874900"
-            }
-          ],
-          "bot": {
-            "name": "teste",
-            "money": 1000,
-            "currency_code": 148
-          }
-        }
-      ],
+      bots: [],
+      currencyCodes: [],
     }
   }
 
   componentDidMount() {
     const bots = localStorage.get('bots')
 
-    botService().list(bots).then((response) => {
+    botService().list({currency_codes: bots}).then((response) => {
       this.populateBots(response.data.bots)
     })
   }
 
   populateBots(bots) {
     this.setState({ bots })
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault()
+    let currencyCodes = this.state.currencyCodes
+    currencyCodes = currencyCodes.push(148)
+    this.setState({currency_codes: currencyCodes})
+
+    localStorage.set('bots', this.state.currencyCodes)
+
+    botService().list({currency_codes: localStorage.get('bots')}).then((response) => {
+      this.populateBots(response.data.bots)
+    })
   }
 
   renderBots() {
@@ -77,11 +71,6 @@ class Cleverbot extends Component {
         </Fragment>
       )
     )
-  }
-
-  handleSubmit = (event) => {
-    localStorage.set('bots', [148])
-    event.preventDefault()
   }
 
   render() {

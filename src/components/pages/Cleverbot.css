@@ -25,6 +25,7 @@
   display: flex;
   flex-orientation: row;
   justify-content: flex-start;
+  flex-wrap: wrap;
   margin: 10px;
 }
 
@@ -36,6 +37,7 @@
   min-height: 300px;
   width: 300px;
   margin-right: 10px;
+  margin-top: 10px;
 }
 
 .orders {
