@@ -46,7 +46,7 @@ class Cleverbot extends Component {
     botService().create({
       name: this.state.botName,
       currency_code: this.state.currencyCode,
-      money: this.state.initialCapital,
+      money: parseFloat(this.state.initialCapital).toFixed(2),
       short_period: this.state.shortPeriod,
       long_period: this.state.longPeriod
     }).then((response) => {
@@ -62,6 +62,14 @@ class Cleverbot extends Component {
       shortPeriod: "",
       longPeriod: ""
     })
+  }
+
+  getIntentBasedOnOrderType(orderType) {
+    return orderType === "buy" ? "success" : "danger"
+  }
+
+  getOrderNameBasedOnType(orderType) {
+    return orderType === "buy" ? "COMPRA" : "VENDA"
   }
 
   renderBots() {
@@ -86,14 +94,14 @@ class Cleverbot extends Component {
 
             <div className="orders">
               { bot.orders.map(order => (
-                <Table.Row key={bot.name} intent="success" margin={5} >
-                  <Table.TextCell>Ordem de {order.type} realizada no valor de: R$ {order.price} </Table.TextCell>
+                <Table.Row key={bot.name} intent={this.getIntentBasedOnOrderType(order.type)}  margin={5} >
+                  <Table.TextCell>Ordem de {this.getOrderNameBasedOnType(order.type)} realizada valor de: R$ {order.price} </Table.TextCell>
                 </Table.Row>
               )) }
             </div>
             <div className="totals">
-              <Heading size={100} marginTop="default">Total Acumulado(R$) 100,00</Heading>
-              <Heading size={100} marginTop="default">Lucro/Prejuizo(R$) 100,00</Heading>
+              <Heading size={100} marginTop="default">Total Acumulado(R$): {bot.bot.money + (bot.orders_total)}</Heading>
+              <Heading size={100} marginTop="default">Lucro/Prejuizo(R$): {bot.orders_total}</Heading>
             </div>
           </div>
         </Fragment>
