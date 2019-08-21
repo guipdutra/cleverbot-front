@@ -5,10 +5,11 @@ import {
   FormField,
   Button,
   Table,
-  Heading
+  Heading,
+  Select
 } from 'evergreen-ui'
 import localStorage from 'local-storage'
-import { botService } from '../../services'
+import { botService, currencyDiscovery } from '../../services'
 
 class Cleverbot extends Component {
   constructor(props) {
@@ -91,7 +92,7 @@ class Cleverbot extends Component {
       (
         <Fragment>
           <div className="bot">
-            <Heading size={100} marginTop="default">Robô {bot.bot.name} operando BTC_ETH</Heading>
+            <Heading size={100} marginTop="default">Robô {bot.bot.name} operando {currencyDiscovery.getCurrency(bot.bot.currency_code)}</Heading>
 
             <div className="orders">
               { bot.orders.map(order => (
@@ -130,11 +131,11 @@ class Cleverbot extends Component {
               />
             </FormField>
             <FormField label="Simbolo do criptoativo" labelFor="currencyCode">
-              <TextInput
-                name="currencyCode"
-                onChange={e => this.setState({ currencyCode: e.target.value })}
-                value={this.state.currencyCode}
-              />
+                <Select value={this.state.currencyCode} onChange={event => this.setState({ currencyCode: event.target.value })}>
+                  { currencyDiscovery.getAllCurrenciesKeys().map(key =>
+                    <option value={key}>{currencyDiscovery.getCurrency(key)}</option>
+                  )}
+                </Select>
             </FormField>
             <FormField label="Periodo curto da média movel" labelFor="shortPeriod">
               <TextInput
