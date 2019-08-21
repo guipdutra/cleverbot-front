@@ -40,8 +40,9 @@ class Cleverbot extends Component {
     event.preventDefault()
 
     let currencyCodes = this.state.currencyCodes
-    currencyCodes = currencyCodes.push(this.state.currencyCode)
+    currencyCodes.push(this.state.currencyCode)
     this.setState({currency_codes: currencyCodes})
+    localStorage.set("bots", this.state.currencyCodes)
 
     botService().create({
       name: this.state.botName,
@@ -50,7 +51,7 @@ class Cleverbot extends Component {
       short_period: this.state.shortPeriod,
       long_period: this.state.longPeriod
     }).then((response) => {
-      botService().list({currency_codes: this.state.currencyCodes}).then((response) => {
+      botService().list({currency_codes: localStorage.get("bots")}).then((response) => {
         this.populateBots(response.data.bots)
       })
     })
