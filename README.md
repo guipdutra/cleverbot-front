@@ -1,3 +1,4 @@
 Frontend app of Cleverbot
 
-start the app: `yarn start`
+* first install the dependencies: `yarn install`
+* start the app: `yarn start`
