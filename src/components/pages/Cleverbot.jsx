@@ -131,7 +131,7 @@ class Cleverbot extends Component {
               />
             </FormField>
             <FormField label="Simbolo do criptoativo" labelFor="currencyCode">
-                <Select value={this.state.currencyCode} onChange={event => this.setState({ currencyCode: event.target.value })}>
+                <Select value={this.state.currencyCode} defaultValue="25" onChange={event => this.setState({ currencyCode: event.target.value })}>
                   { currencyDiscovery.getAllCurrenciesKeys().map(key =>
                     <option value={key}>{currencyDiscovery.getCurrency(key)}</option>
                   )}
