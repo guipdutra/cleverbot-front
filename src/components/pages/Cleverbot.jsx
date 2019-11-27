@@ -16,7 +16,7 @@ class Cleverbot extends Component {
     super(props)
     this.state = {
       botName: "",
-      currencyCode: "",
+      currencyCode: "25",
       initialCapital: "",
       shortPeriod: "",
       longPeriod: "",
@@ -131,7 +131,7 @@ class Cleverbot extends Component {
               />
             </FormField>
             <FormField label="Simbolo do criptoativo" labelFor="currencyCode">
-                <Select value={this.state.currencyCode} defaultValue="25" onChange={event => this.setState({ currencyCode: event.target.value })}>
+                <Select defaultValue={this.state.currencyCode} onChange={event => this.setState({ currencyCode: event.target.value })}>
                   { currencyDiscovery.getAllCurrenciesKeys().map(key =>
                     <option value={key}>{currencyDiscovery.getCurrency(key)}</option>
                   )}
